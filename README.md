@@ -1,4 +1,4 @@
-# Vinasoy Sale in First Six Year of 2024
+# Vinasoy Sale in First Six Months of 2024
 
 ## Import libraries and read data
 
