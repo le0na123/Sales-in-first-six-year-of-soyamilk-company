@@ -180,3 +180,32 @@ plt.title('Biểu đồ thể hiện sản lượng bán ra của các nhà phâ
 ```
 
 ![alt text](image-4.png)
+
+# **Analyze sales of MT systems in each contributors**
+## Create pivot table
+
+```python
+systems = pd.pivot_table(df.sort_values('Tháng', ascending=True), index=['Hệ thống'], columns=['Tên NPP'], values='Thành tiền', aggfunc='sum')
+```
+
+## Visualization
+```python
+# Tạo subplot
+fig, axs = plt.subplots(2, 2, figsize=(20, 7))
+
+# Flat list của các subplot axes
+axes = axs.flatten()
+formatter = ticker.FuncFormatter(lambda x, pos: '{:,.0f}'.format(x))
+
+# Vẽ biểu đồ thanh cho mỗi NPP
+for ax, npp in zip(axes, systems.columns):  # Bỏ qua cột 'Hệ thống'
+    sns.barplot(data=systems.sort_values('Hệ thống', ascending=True), x='Hệ thống', y=npp, ax=ax)
+    ax.set_title(f'Biểu đồ thể hiện sản lượng của các hệ thống siêu thị tại nhà phân phối {npp}')  # Đặt tiêu đề cho từng subplot
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')  # Xoay nhãn trục x
+    ax.yaxis.set_major_formatter(formatter)
+
+# Điều chỉnh layout
+plt.tight_layout();
+```
+
+![alt text](image-5.png)
