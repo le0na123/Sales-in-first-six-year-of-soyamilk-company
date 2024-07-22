@@ -155,3 +155,28 @@ for t, z in zip(orders['Tháng lấy đơn'], orders['Chất lượng đơn hàn
 ```
 
 ![alt text](image-3.png)
+
+# **Visualize sales of all contrbutors in team**
+
+## Create pivot table
+
+```python
+contributors = pd.pivot_table(df.sort_values('Tháng', ascending=True),index=['Tháng','Tháng lấy đơn'], columns='Tên NPP', values='Thành tiền', aggfunc='sum')
+```
+
+## Visualization
+
+```python
+import matplotlib.ticker as ticker
+plt.figure(figsize=(20,7))
+for contributor in contributors.columns:
+    sns.lineplot(contributors, x='Tháng lấy đơn', y=contributor, label=contributor, linewidth=3, marker='o')
+    plt.legend(loc='upper right')
+    plt.ylabel('')
+plt.grid()
+formatter = ticker.FuncFormatter(lambda x, pos: '{:,.0f}'.format(x))
+plt.gca().yaxis.set_major_formatter(formatter)
+plt.title('Biểu đồ thể hiện sản lượng bán ra của các nhà phân phối theo từng tháng của toàn kênh MT - Đông Nam Bộ 1', color='#6EB43F', fontweight = '600');
+```
+
+![alt text](image-4.png)
