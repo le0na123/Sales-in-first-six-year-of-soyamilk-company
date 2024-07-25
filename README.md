@@ -209,3 +209,31 @@ plt.tight_layout();
 ```
 
 ![alt text](image-5.png)
+
+# **SKUs that was dropped down in last six months**
+
+## Filter df just with 'Ca.10h', 'Vp.30h', 'Vs.30h', 'Vo.30h', 'Fs.36h', 'Fa.10h', 'Cp.36h'
+
+```python
+skusDrop = ['Ca.10h', 'Vp.30h', 'Vs.30h', 'Vo.30h', 'Fs.36h', 'Fa.10h', 'Cp.36h']
+
+df_drop = df[(df['Tên sản phẩm'].isin(skusDrop)) & (df['Tên NPP'] == 'ST_Hoàng Anh Khoa - Đồng Nai')]
+```
+
+## Visualization dropped skus
+
+```python
+df_drop_sum = df_drop.groupby('Tên sản phẩm').agg({'Hàng bán (Thùng)': 'mean'}).reset_index()
+# df_drop_sum['Trung bình'] = round(df_drop_sum['Hàng bán (Thùng)'] / 6, 2)
+df_drop_sum = df_drop_sum.sort_values('Hàng bán (Thùng)', ascending=True)
+plt.figure(figsize=(20,7))
+plt.barh(df_drop_sum['Tên sản phẩm'], df_drop_sum['Hàng bán (Thùng)'], color='#6EB43F')
+plt.title(f'Biểu đồ thể hiện trung bình sản lượng bán ra của các SKUs thường xuyên bị cắt bỏ trong sáu tháng đầu năm tại NPP {df_drop['Tên NPP'].unique()[0]}')
+plt.xlabel('Số lượng thùng')
+plt.ylabel('SKUs')
+for x, y in zip(df_drop_sum['Tên sản phẩm'], df_drop_sum['Hàng bán (Thùng)']):
+    label = "{:,.2f}".format(y)  # Định dạng số thập phân cho label
+    plt.annotate(label, xy=(y, x), textcoords='offset points', xytext=(20,3), ha='center', color='#000', fontsize = 12, fontweight = '500');
+```
+
+![alt text](image-7.png)
