@@ -199,7 +199,7 @@ formatter = ticker.FuncFormatter(lambda x, pos: '{:,.0f}'.format(x))
 
 # Vẽ biểu đồ thanh cho mỗi NPP
 for ax, npp in zip(axes, systems.columns):  # Bỏ qua cột 'Hệ thống'
-    sns.barplot(data=systems.sort_values('Hệ thống', ascending=True), x='Hệ thống', y=npp, ax=ax)
+    sns.barplot(data=systems.sort_values('Hệ thống', ascending=True), x='Hệ thống', y=npp, ax=ax, color='#6EB43F')
     ax.set_title(f'Biểu đồ thể hiện sản lượng của các hệ thống siêu thị tại nhà phân phối {npp}')  # Đặt tiêu đề cho từng subplot
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')  # Xoay nhãn trục x
     ax.yaxis.set_major_formatter(formatter)
@@ -208,7 +208,7 @@ for ax, npp in zip(axes, systems.columns):  # Bỏ qua cột 'Hệ thống'
 plt.tight_layout();
 ```
 
-![alt text](image-5.png)
+![alt text](image-8.png)
 
 # **SKUs that was dropped down in last six months**
 
