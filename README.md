@@ -1,5 +1,16 @@
 # Vinasoy Sale in First Six Months of 2024
 
+# **Table of content**
+
+1. [Data cleaning and data exploration](#data-cleaning-and-data-exploration)
+2. [Show sales from January to June](#show-sale-all-months)
+3. [Visualize product name and name of supermarket systems](#visualize-product-name-and-name-of-supermarket-systems)
+4. [Find quality of each order by order ID](#find-quality-of-each-order-by-order-id)
+5. [Find quantity of orders and quality of each ordereach month](#find-quantity-of-orders-and-quality-of-each-ordereach-month)
+6. [Visualize sales of all contrbutors in team](#visualize-sales-of-all-contrbutors-in-team)
+7. [Analyze sales of MT systems in each contributors](#analyze-sales-of-mt-systems-in-each-contributors)
+8. [SKUs that was dropped down in last six months](#skus-that-was-dropped-down-in-last-six-months)
+
 ## Import libraries and read data
 
 ```python
@@ -10,6 +21,8 @@ import seaborn as sns
 
 df = pd.read_csv('First _six_months_data.csv')
 ```
+
+## **Data cleaning and data exploration**
 
 ## Delete some columns that we do not need
 
