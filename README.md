@@ -10,6 +10,7 @@
 6. [Visualize sales of all contrbutors in team](#visualize-sales-of-all-contrbutors-in-team)
 7. [Analyze sales of MT systems in each contributors](#analyze-sales-of-mt-systems-in-each-contributors)
 8. [SKUs that was dropped down in last six months](#skus-that-was-dropped-down-in-last-six-months)
+9. [Average of each SKUs in Hoang Anh Khoa](#average-of-each-skus-in-hoang-anh-khoa)
 
 ## Import libraries and read data
 
@@ -250,3 +251,21 @@ for x, y in zip(df_drop_sum['Tên sản phẩm'], df_drop_sum['Hàng bán (Thùn
 ```
 
 ![alt text](image-7.png)
+
+# **Average of each SKUs in Hoang Anh Khoa**
+
+```python
+dfHAk = df[df['Tên NPP'] == 'ST_Hoàng Anh Khoa - Đồng Nai']
+plt.figure(figsize=(20,7))
+dfHAk = dfHAk.groupby(['Tên sản phẩm']).agg({'Hàng bán (Thùng)': 'sum'}).reset_index()
+dfHAk = dfHAk.sort_values('Hàng bán (Thùng)', ascending=False)
+dfHAk['a'] = dfHAk['Hàng bán (Thùng)'] / 6
+sns.barplot(data=dfHAk, x='Tên sản phẩm', y='a', color='#6EB43F')
+plt.ylabel('Tổng thùng')
+plt.title(f'Biểu đồ thể hiện trung bình sản lượng bán ra của tất cả SKUs tại NPP ST_Hoàng Anh Khoa - Đồng Nai trong sáu tháng đầu năm 2024')
+for x, y in zip(dfHAk['Tên sản phẩm'], dfHAk['a']):
+    label = "{:,.2f}".format(y)  # Định dạng số thập phân cho label
+    plt.annotate(label, xy=(x, y), textcoords='offset points', xytext=(0,5), ha='center', color='#000', fontsize = 10, fontweight = '500');
+```
+
+![alt text](image-9.png)
